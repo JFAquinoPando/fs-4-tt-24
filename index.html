@@ -1,144 +1,812 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio Personal</title>
-    <script src="//cdn.tailwindcss.com"></script>
+    <meta name="theme-color" content="#f7f4ef">
+    <meta name="description"
+        content="Portafolio de José Fabricio Aquino Pando, desarrollador Full Stack freelance especializado en aplicaciones web, inteligencia artificial y automatización.">
+    <title>José Fabricio Aquino Pando — Desarrollador Full Stack</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <style>
+        :root {
+            color-scheme: light dark;
+            --paper: #f7f4ef;
+            --surface: #fffefa;
+            --ink: #1e211e;
+            --muted: #656963;
+            --line: #dedbd3;
+            --red: #a8212b;
+            --red-dark: #801922;
+            --blue: #245fa6;
+            --green: #456b50;
+            --soft-red: #f2e6e3;
+            --shadow: 0 22px 60px rgb(40 35 27 / 9%);
+            --font-body: "DM Sans", sans-serif;
+            --font-display: "Manrope", sans-serif;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                color-scheme: dark;
+                --paper: #171916;
+                --surface: #20231f;
+                --ink: #f3f0e9;
+                --muted: #b1b4ac;
+                --line: #3a3e38;
+                --red: #e36a70;
+                --red-dark: #f18a8f;
+                --blue: #83b7f2;
+                --green: #a0c4a5;
+                --soft-red: #382526;
+                --shadow: 0 22px 60px rgb(0 0 0 / 25%);
+            }
+        }
+
+        :root[data-theme="dark"] {
+            color-scheme: dark;
+            --paper: #171916;
+            --surface: #20231f;
+            --ink: #f3f0e9;
+            --muted: #b1b4ac;
+            --line: #3a3e38;
+            --red: #e36a70;
+            --red-dark: #f18a8f;
+            --blue: #83b7f2;
+            --green: #a0c4a5;
+            --soft-red: #382526;
+            --shadow: 0 22px 60px rgb(0 0 0 / 25%);
+        }
+
+        :root[data-theme="light"] {
+            color-scheme: light;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 6rem;
+        }
+
+        body {
+            min-width: 320px;
+            margin: 0;
+            background:
+                radial-gradient(ellipse at 85% 10%, rgb(168 33 43 / 5%), transparent 32rem),
+                var(--paper);
+            color: var(--ink);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            transition: background-color 180ms ease, color 180ms ease;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible {
+            outline: 3px solid var(--blue);
+            outline-offset: 4px;
+        }
+
+        .skip-link {
+            position: fixed;
+            z-index: 20;
+            top: 1rem;
+            left: 1rem;
+            padding: .7rem 1rem;
+            transform: translateY(-160%);
+            border-radius: .5rem;
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        .skip-link:focus {
+            transform: translateY(0);
+        }
+
+        .site-nav {
+            position: fixed;
+            z-index: 10;
+            top: 1rem;
+            left: 50%;
+            display: flex;
+            width: max-content;
+            max-width: calc(100% - 2rem);
+            align-items: center;
+            gap: .25rem;
+            padding: .45rem;
+            transform: translateX(-50%);
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: color-mix(in srgb, var(--surface) 88%, transparent);
+            box-shadow: 0 8px 30px rgb(0 0 0 / 7%);
+            backdrop-filter: blur(16px);
+        }
+
+        .site-nav a {
+            padding: .55rem .9rem;
+            border-radius: 999px;
+            color: var(--muted);
+            font-size: .82rem;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: color 160ms ease, background-color 160ms ease;
+        }
+
+        .site-nav a:hover,
+        .site-nav a:focus-visible {
+            background: var(--soft-red);
+            color: var(--red-dark);
+        }
+
+        .hero,
+        main,
+        footer {
+            width: min(100% - 3rem, 1080px);
+            margin-inline: auto;
+        }
+
+        .hero {
+            display: grid;
+            min-height: min(850px, 100svh);
+            align-items: center;
+            grid-template-columns: 1.05fr .95fr;
+            gap: clamp(2rem, 7vw, 6rem);
+            padding-block: 8rem 5rem;
+        }
+
+        .hero-copy {
+            position: relative;
+            z-index: 1;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: .65rem;
+            margin: 0 0 1rem;
+            color: var(--blue);
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            width: 2rem;
+            height: 1px;
+            background: currentColor;
+            content: "";
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin-top: 0;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: var(--font-display);
+            line-height: 1.12;
+        }
+
+        h1 {
+            max-width: 650px;
+            margin-bottom: 1.3rem;
+            font-size: clamp(3.2rem, 7.5vw, 6.6rem);
+            font-weight: 800;
+            letter-spacing: -.075em;
+        }
+
+        h1 span {
+            display: block;
+            color: var(--red);
+        }
+
+        .hero-intro {
+            max-width: 510px;
+            color: var(--muted);
+            font-size: clamp(1rem, 1.6vw, 1.15rem);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .8rem;
+            margin-top: 2rem;
+        }
+
+        .button {
+            display: inline-flex;
+            min-height: 3rem;
+            align-items: center;
+            justify-content: center;
+            gap: .55rem;
+            padding: .75rem 1.2rem;
+            border: 1px solid var(--red);
+            border-radius: .45rem;
+            background: var(--red);
+            color: #fff;
+            font-size: .9rem;
+            font-weight: 700;
+            transition: transform 160ms ease, background-color 160ms ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            background: var(--red-dark);
+        }
+
+        .button-secondary {
+            border-color: var(--line);
+            background: transparent;
+            color: var(--ink);
+        }
+
+        .button-secondary:hover {
+            background: var(--surface);
+        }
+
+        .hero-visual {
+            position: relative;
+            max-width: 440px;
+            justify-self: end;
+        }
+
+        .hero-visual::before {
+            position: absolute;
+            z-index: -1;
+            inset: 9% -8% -7% 12%;
+            border: 1px solid var(--red);
+            border-radius: 48% 48% 1rem 1rem;
+            content: "";
+            transform: rotate(5deg);
+        }
+
+        .hero-visual::after {
+            position: absolute;
+            z-index: -1;
+            top: -1.3rem;
+            right: -1.6rem;
+            width: 5.5rem;
+            height: 5.5rem;
+            border: 1px solid var(--green);
+            border-radius: 50%;
+            content: "";
+        }
+
+        .hero-visual img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            border: 1px solid var(--line);
+            border-radius: 48% 48% .8rem .8rem;
+            background: var(--surface);
+            box-shadow: var(--shadow);
+            object-fit: cover;
+            filter: saturate(.75);
+            transition: filter 250ms ease, transform 250ms ease;
+        }
+
+        .hero-visual:hover img {
+            transform: translateY(-5px);
+            filter: saturate(1);
+        }
+
+        main {
+            padding-bottom: 5rem;
+        }
+
+        main section {
+            padding-block: clamp(4rem, 9vw, 7rem);
+            border-top: 1px solid var(--line);
+        }
+
+        .section-heading {
+            max-width: 650px;
+            margin-bottom: 2.4rem;
+        }
+
+        .section-heading h2 {
+            margin-bottom: .75rem;
+            font-size: clamp(2rem, 4.5vw, 3.5rem);
+            font-weight: 800;
+            letter-spacing: -.06em;
+        }
+
+        .section-heading > p:last-child,
+        .about-copy p {
+            color: var(--muted);
+        }
+
+        .about-layout {
+            display: grid;
+            grid-template-columns: .7fr 1.3fr;
+            gap: clamp(2rem, 8vw, 7rem);
+        }
+
+        .about-mark {
+            align-self: start;
+            color: var(--red);
+            font-family: var(--font-display);
+            font-size: clamp(5rem, 12vw, 9rem);
+            font-weight: 800;
+            letter-spacing: -.1em;
+            line-height: .9;
+        }
+
+        .about-copy p {
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: .8rem;
+        }
+
+        .skill-card {
+            display: flex;
+            min-height: 105px;
+            align-items: center;
+            gap: .8rem;
+            padding: .9rem;
+            border: 1px solid var(--line);
+            border-radius: .65rem;
+            background: var(--surface);
+            transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--red);
+            box-shadow: var(--shadow);
+        }
+
+        .skill-card img {
+            width: 1.65rem;
+            height: 1.65rem;
+            flex: 0 0 auto;
+        }
+
+        .skill-card span {
+            font-size: .84rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.4rem;
+        }
+
+        .project-card {
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: .8rem;
+            background: var(--surface);
+            box-shadow: var(--shadow);
+        }
+
+        .project-card > img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: var(--soft-red);
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-content h3 {
+            margin-bottom: .65rem;
+            font-size: 1.35rem;
+        }
+
+        .project-content p {
+            margin-bottom: 1rem;
+            color: var(--muted);
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+        }
+
+        .project-tags span {
+            padding: .28rem .65rem;
+            border-radius: 999px;
+            background: var(--soft-red);
+            color: var(--red-dark);
+            font-size: .74rem;
+            font-weight: 700;
+        }
+
+        .repo-link {
+            display: inline-block;
+            margin-top: 1.5rem;
+            color: var(--blue);
+            font-weight: 700;
+        }
+
+        .repo-link:hover {
+            text-decoration: underline;
+            text-underline-offset: .25rem;
+        }
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr .8fr;
+            gap: clamp(2rem, 8vw, 7rem);
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .contact-form label {
+            display: grid;
+            gap: .4rem;
+            font-size: .86rem;
+            font-weight: 700;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: .85rem 1rem;
+            border: 1px solid var(--line);
+            border-radius: .45rem;
+            background: var(--surface);
+            color: var(--ink);
+            font: inherit;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: var(--muted);
+            opacity: .8;
+        }
+
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .contact-aside {
+            align-self: center;
+            padding: 1.5rem;
+            border-left: 2px solid var(--green);
+        }
+
+        .contact-aside p {
+            color: var(--muted);
+        }
+
+        footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            padding-block: 1.5rem 2rem;
+            border-top: 1px solid var(--line);
+        }
+
+        .footer-note {
+            margin: 0;
+            color: var(--muted);
+            font-size: .82rem;
+        }
+
+        .social-links {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .social-links a {
+            display: grid;
+            width: 2.65rem;
+            height: 2.65rem;
+            place-items: center;
+            border: 1px solid var(--line);
+            border-radius: 50%;
+            color: var(--muted);
+            transition: color 160ms ease, border-color 160ms ease, transform 160ms ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-2px);
+            border-color: var(--red);
+            color: var(--red);
+        }
+
+        .social-links svg {
+            width: 1.1rem;
+            height: 1.1rem;
+            fill: currentColor;
+        }
+
+        @media (max-width: 760px) {
+            .site-nav {
+                top: .65rem;
+                overflow-x: auto;
+                justify-content: flex-start;
+                border-radius: .8rem;
+            }
+
+            .site-nav a {
+                padding-inline: .7rem;
+                font-size: .76rem;
+            }
+
+            .hero {
+                min-height: auto;
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                padding-top: 9rem;
+            }
+
+            .hero-visual {
+                width: min(76%, 360px);
+                justify-self: center;
+            }
+
+            .about-layout {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .about-mark {
+                font-size: 5rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .contact-layout {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .hero,
+            main,
+            footer {
+                width: min(100% - 2rem, 1080px);
+            }
+
+            .hero {
+                padding-top: 8rem;
+            }
+
+            h1 {
+                font-size: clamp(3rem, 14vw, 4.3rem);
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: .55rem;
+            }
+
+            .skill-card {
+                min-height: 82px;
+                gap: .55rem;
+                padding: .7rem;
+            }
+
+            .skill-card span {
+                font-size: .78rem;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                align-items: flex-start;
+                flex-direction: column-reverse;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
 </head>
 
-<body class="font-['Rubik'] dark:bg-gray-950 dark:text-gray-100">
-    <nav class="fixed top-3 max-w-xl bg-red-900 p-3 rounded-lg left-1/4 z-3">
+<body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <nav class="site-nav" aria-label="Navegación principal">
         <a href="#inicio">Inicio</a>
-        <a href="#acerca">Acerca de mi</a>
-        <a href="#habilidades">Habilidades y Tecnologías</a>
+        <a href="#acerca">Sobre mí</a>
+        <a href="#habilidades">Habilidades</a>
         <a href="#proyectos">Proyectos</a>
-        <a href="#contáctame">Contáctame</a>
+        <a href="#contactame">Contacto</a>
     </nav>
-    <header id="inicio" class="h-dvh  max-w-7xl w-full mx-auto">
-        <section class="grid items-center place-items-center grid-cols-2 bg-green-0 h-dvh">
-            <div class="max-w-lg flex flex-col gap-6">
-                <span class="text-blue-700">Hola, soy</span>
-                <h1 class="text-red-800 text-7xl">José Fabricio Aquino Pando</h1>
-                <p>
-                    Freelance Full-Stack Developer specializing in high-performance web applications, AI integration,
-                    and workflow automation. Helping startups and businesses scale.
-                </p>
-            </div>
-            <picture>
-                <img class="drop-shadow-[0_35px_35px_rgba(100,0,100,0.95)] grayscale-[60%] hover:drop-shadow-[0_35px_35px_rgba(250,100,250,0.95)] hover:grayscale-0 transition hover:scale-110 duration-700"
-                    src="./assets/preview.png" alt="José Fabricio Aquino Pando">
-            </picture>
-        </section>
-    </header>
-    <main class="max-w-4xl w-full">
-        <section id="acerca">
-            <h3>Acerca de mi</h3>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur sequi accusantium quo aspernatur
-                vero magnam dolorum reprehenderit voluptatem vel ea officiis aliquam culpa, earum optio modi esse
-                perspiciatis non! Veniam.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae eos, inventore totam iste aspernatur
-                ratione consequatur quasi nam fugiat cum magnam impedit aut blanditiis qui, odit, alias optio incidunt
-                architecto.</p>
-        </section>
-        <section id="habilidades">
-            <h3>Habilidades y Tecnologías</h3>
-            <article class="grid-cols-8 grid">
-                <img src="" alt="git">
-                <img src="" alt="github">
-                <img src="" alt="javascript">
-                <img src="" alt="typescript">
-                <img src="" alt="php">
-                <img src="" alt="python">
-                <img src="" alt="css">
-                <img src="" alt="tailwindcss">
-                <img src="" alt="html">
-                <img src="" alt="figma">
-                <img src="" alt="sqlite">
-                <img src="" alt="postgresql">
-                <img src="" alt="mysql">
-                <img src="" alt="reactjs">
-                <img src="" alt="mongodb">
-                <img src="" alt="nodejs">
-                <img src="" alt="gcp">
-                <img src="" alt="azure">
-                <img src="" alt="laravel">
-                <img src="" alt="aws">
-            </article>
-        </section>
-        <section id="proyectos">
-            <h3>Proyectos</h3>
-            <!-- extraer de github -->
-            <div class="grid grid-cols-1 md:grid-cols-3">
-                <article>
-                    <img src="https://www.redoyanulhaque.me/images/Phoenix3.0.png" alt="">
-                    <h3>Proyecto 1</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum laboriosam accusantium quasi
-                        cupiditate inventore quidem ex natus aliquam? Consequuntur enim suscipit repellendus maxime,
-                        blanditiis vel natus possimus explicabo a quam.</p>
-                    <div>
-                        <!-- iconos de tecnologías usadas -->
-                        <img src="" alt="">
-                        <img src="" alt="">
-                        <img src="" alt="">
-                    </div>
-                </article>
-            </div>
-            <div class="text-center">
-                <a href="https://github.com/JFAquinoPando/">Ver más repositorios</a>
-            </div>
-        </section>
-        <section id="contactame">
-            <h3>Contáctame</h3>
-            <div>
-                <form action="" method="post">
-                    <div>
-                        <input type="text" name="nombre" placeholder="Ej: Juan Pérez">
-                    </div>
-                    <div>
-                        <input type="email" name="correo" placeholder="Ej: micorreo@gmail.com">
-                    </div>
-                    <div>
-                        <textarea name="comentario" placeholder="Lo que quieras decirme"></textarea>
-                    </div>
-                    <button>Contactar</button>
-                </form>
-                <article>
 
+    <header class="hero" id="inicio">
+        <div class="hero-copy">
+            <p class="eyebrow">Desarrollador Full Stack</p>
+            <h1>Hola, soy <span>José Fabricio.</span></h1>
+            <p class="hero-intro">
+                Desarrollador freelance enfocado en aplicaciones web de alto rendimiento,
+                integración de inteligencia artificial y automatización de flujos de trabajo.
+            </p>
+            <div class="hero-actions">
+                <a class="button" href="#proyectos">Explorar proyectos <span aria-hidden="true">↗</span></a>
+                <a class="button button-secondary" href="#contactame">Hablemos</a>
+            </div>
+        </div>
+        <picture class="hero-visual">
+            <img src="./assets/preview.png" alt="Retrato de José Fabricio Aquino Pando" width="440" height="550">
+        </picture>
+    </header>
+
+    <main id="contenido">
+        <section id="acerca" aria-labelledby="about-title">
+            <div class="section-heading">
+                <p class="eyebrow">Un poco sobre mí</p>
+                <h2 id="about-title">Tecnología útil, hecha con intención.</h2>
+            </div>
+            <div class="about-layout">
+                <span class="about-mark" aria-hidden="true">JFA.</span>
+                <div class="about-copy">
+                    <p>
+                        Soy José Fabricio Aquino Pando, desarrollador Full Stack freelance.
+                        Me especializo en crear aplicaciones web rápidas y en conectar herramientas
+                        modernas para resolver necesidades reales.
+                    </p>
+                    <p>
+                        También trabajo con integración de IA y automatización para ayudar a
+                        startups y negocios a simplificar procesos y crecer.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="habilidades" aria-labelledby="skills-title">
+            <div class="section-heading">
+                <p class="eyebrow">Herramientas de trabajo</p>
+                <h2 id="skills-title">Habilidades y tecnologías</h2>
+                <p>Un conjunto versátil para construir desde la interfaz hasta la infraestructura.</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card"><img src="https://cdn.simpleicons.org/git/F05032" alt="" loading="lazy"><span>Git</span></div>
+                <div class="skill-card"><img src="https://cdn.simpleicons.org/github/181717" alt="" loading="lazy"><span>GitHub</span></div>
+                <div class="skill-card"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="" loading="lazy"><span>JavaScript</span></div>
+                <div class="skill-card"><img src="https://cdn.simpleicons.org/typescript/3178C6" alt="" loading="lazy"><span>TypeScript</span></div>
+                <div class="skill-card"><img src="https://cdn.simpleicons.org/php/777BB4" alt="" loading="lazy"><span>PHP</span></div>
+                <div class="skill-card"><img src="https://cdn.simpleicons.org/python/3776AB" alt="" loading="lazy"><span>Python</span></div>
+                <div class="skill-card"><img src="https://cdn.simpleicons.org/css3/1572B6" alt="" loading="lazy"><span>CSS</span></div>
+                <div class="skill-card"><img src="https://cdn.simpleicons.org/tailwindcss/06B6D4" alt="" loading="lazy"><span>Tailwind CSS</span></div>
+                <div class="skill-card"><img src="https://cdn.simpleicons.org/html5/E34F26" alt="" loading="lazy"><span>HTML</span></div>
+                <div class="skill-card"><img src="https://cdn.simpleicons.org/figma/F24E1E" alt="" loading="lazy"><span>Figma</span></div>
+                <div class="skill-card"><img src="https://cdn.simpleicons.org/sqlite/003B57" alt="" loading="lazy"><span>SQLite</span></div>
+                <div class="skill-card"><img src="https://cdn.simpleicons.org/postgresql/4169E1" alt="" loading="lazy"><span>PostgreSQL</span></div>
+                <div class="skill-card"><img src="https://cdn.simpleicons.org/mysql/4479A1" alt="" loading="lazy"><span>MySQL</span></div>
+                <div class="skill-card"><img src="https://cdn.simpleicons.org/react/61DAFB" alt="" loading="lazy"><span>React</span></div>
+                <div class="skill-card"><img src="https://cdn.simpleicons.org/mongodb/47A248" alt="" loading="lazy"><span>MongoDB</span></div>
+                <div class="skill-card"><img src="https://cdn.simpleicons.org/nodedotjs/5FA04E" alt="" loading="lazy"><span>Node.js</span></div>
+                <div class="skill-card"><img src="https://cdn.simpleicons.org/googlecloud/4285F4" alt="" loading="lazy"><span>Google Cloud</span></div>
+                <div class="skill-card"><img src="https://cdn.simpleicons.org/microsoftazure/0078D4" alt="" loading="lazy"><span>Azure</span></div>
+                <div class="skill-card"><img src="https://cdn.simpleicons.org/laravel/FF2D20" alt="" loading="lazy"><span>Laravel</span></div>
+                <div class="skill-card"><img src="https://cdn.simpleicons.org/amazonaws/232F3E" alt="" loading="lazy"><span>AWS</span></div>
+            </div>
+        </section>
+
+        <section id="proyectos" aria-labelledby="projects-title">
+            <div class="section-heading">
+                <p class="eyebrow">Trabajo seleccionado</p>
+                <h2 id="projects-title">Proyectos</h2>
+                <p>Una selección de proyectos y experimentos en desarrollo.</p>
+            </div>
+            <div class="project-grid">
+                <article class="project-card">
+                    <img src="https://www.redoyanulhaque.me/images/Phoenix3.0.png"
+                        alt="Vista previa del proyecto destacado" loading="lazy" width="800" height="450">
+                    <div class="project-content">
+                        <h3>Proyecto destacado</h3>
+                        <p>
+                            Desarrollo de aplicaciones web modernas, cuidando el rendimiento,
+                            la experiencia de usuario y una arquitectura preparada para crecer.
+                        </p>
+                        <div class="project-tags" aria-label="Tecnologías">
+                            <span>Web</span><span>Full Stack</span><span>UI/UX</span>
+                        </div>
+                    </div>
                 </article>
+            </div>
+            <a class="repo-link" href="https://github.com/JFAquinoPando/" target="_blank" rel="noopener noreferrer">
+                Ver más repositorios <span aria-hidden="true">↗</span>
+            </a>
+        </section>
+
+        <section id="contactame" aria-labelledby="contact-title">
+            <div class="section-heading">
+                <p class="eyebrow">¿Tienes una idea?</p>
+                <h2 id="contact-title">Hablemos de tu próximo proyecto.</h2>
+            </div>
+            <div class="contact-layout">
+                <form class="contact-form" action="#" method="post">
+                    <label for="nombre">Nombre
+                        <input id="nombre" type="text" name="nombre" placeholder="Ej.: Juan Pérez" autocomplete="name" required>
+                    </label>
+                    <label for="correo">Correo electrónico
+                        <input id="correo" type="email" name="correo" placeholder="Ej.: micorreo@gmail.com" autocomplete="email" required>
+                    </label>
+                    <label for="comentario">Mensaje
+                        <textarea id="comentario" name="comentario" placeholder="Cuéntame un poco sobre tu idea..." required></textarea>
+                    </label>
+                    <button class="button" type="submit">Enviar mensaje <span aria-hidden="true">↗</span></button>
+                </form>
+                <aside class="contact-aside">
+                    <p class="eyebrow">Contacto</p>
+                    <p>¿Prefieres escribir directamente? Encuéntrame también en mis redes.</p>
+                </aside>
             </div>
         </section>
     </main>
+
     <footer>
-        <ul>
+        <p class="footer-note">© José Fabricio Aquino Pando</p>
+        <ul class="social-links" aria-label="Redes sociales">
             <li>
-                <a href="https://x.com/jfaquinopando">
-                    <!-- X -->
+                <a href="https://x.com/jfaquinopando" aria-label="X" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 14.6 5.5 22H2.4l7.3-8.4L1.9 2h6.5l4.5 6.8L18.9 2Zm-1.1 18h1.7L7.4 3.9H5.6L17.8 20Z"/></svg>
                 </a>
             </li>
             <li>
-                <a href="https://youtube.com/jfaquinopando">
-                    <!-- YouTube -->
+                <a href="https://youtube.com/jfaquinopando" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.6 3.6 12 3.6 12 3.6s-7.6 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.8.5 9.4.5 9.4.5s7.6 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>
                 </a>
             </li>
             <li>
-                <a href="https://www.linkedin.com/in/jos%C3%A9-fabricio-aquino-pando/">
-                    <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/jos%C3%A9-fabricio-aquino-pando/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.4 2H3.6A1.6 1.6 0 0 0 2 3.6v16.8A1.6 1.6 0 0 0 3.6 22h16.8a1.6 1.6 0 0 0 1.6-1.6V3.6A1.6 1.6 0 0 0 20.4 2ZM8 19H4.9V9H8v10ZM6.5 7.6a1.8 1.8 0 1 1 0-3.6 1.8 1.8 0 0 1 0 3.6ZM19 19h-3.1v-4.9c0-1.2 0-2.7-1.7-2.7s-2 1.3-2 2.6V19H9V9h3v1.4h.1a3.3 3.3 0 0 1 3-1.7c3.2 0 3.9 2.1 3.9 4.8V19Z"/></svg>
                 </a>
             </li>
             <li>
-                <a href="https://github.com/jfaquinopando">
-                    <!-- GitHub -->
+                <a href="https://github.com/jfaquinopando" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .8a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.2.8-.5v-2c-3.3.7-4-1.4-4-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.4-5.5-6.3 0-1.4.5-2.5 1.2-3.4-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.5 1.3a12 12 0 0 1 6.4 0c2.4-1.6 3.5-1.3 3.5-1.3.7 1.7.3 3 .2 3.3.8.9 1.2 2 1.2 3.4 0 4.9-2.8 6-5.5 6.3.4.4.8 1 .8 2.1v3.2c0 .3.2.6.8.5A11.5 11.5 0 0 0 12 .8Z"/></svg>
                 </a>
             </li>
             <li>
-                <a href="https://facebook.com/jfaquinopando">
-                    <!-- Facebook -->
+                <a href="https://facebook.com/jfaquinopando" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7.1V12h3V9.3c0-3 1.8-4.7 4.5-4.7 1.3 0 2.6.2 2.6.2v2.9h-1.5c-1.5 0-2 .9-2 1.9V12h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12Z"/></svg>
                 </a>
             </li>
         </ul>
