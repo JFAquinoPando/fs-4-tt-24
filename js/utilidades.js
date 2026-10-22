@@ -13,5 +13,8 @@ export const pedir = async (url, opciones = {method: "GET"}) => {
 }
 
 export const mostrarIcono = (tecnologia) => {
+    if (tecnologia.lower() === "blade") {
+        return `https://cdn.simpleicons.org/laravel`
+    }
     return `https://cdn.simpleicons.org/${tecnologia.lower()}`
 }

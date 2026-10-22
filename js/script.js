@@ -1,4 +1,4 @@
-import { $, pedir } from "./utilidades.js";
+import { $, pedir, mostrarIcono } from "./utilidades.js";
 
 const listado = $("#listado-proyectos")
 const desdeGitHub = await pedir("https://api.github.com/users/jfaquinopando/repos?sort=updated&per_page=9")
@@ -11,10 +11,10 @@ const insertar = desdeGitHub.map(
                     <div class="p-6">
                         <h3 class="mb-3 text-xl font-bold">${repositorio.name}</h3>
                         <p class="mb-4 text-[var(--muted)]">
-                            ${repositorio.descripcion}
+                            ${repositorio.description}
                         </p>
                         <div class="flex flex-wrap gap-2" aria-label="Tecnologías">
-                            <span class="rounded-full bg-[var(--soft-red)] px-3 py-1 text-xs font-bold text-[var(--red-dark)]">Web</span>
+                            <span class="rounded-full bg-[var(--soft-red)] px-3 py-1 text-xs font-bold text-[var(--red-dark)]">${repositorio.language}</span>
                         </div>
                     </div>
                 </article>`
